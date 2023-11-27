@@ -1,0 +1,41 @@
+{
+  "name": "adv",
+  "version": "1.0.0",
+  "main": "./src/index.ts",
+  "repository": "git@github.com:shammasov-max/adv.git",
+  "author": "Max Shammasov <miramaxis@gmail.com>",
+  "license": "MIT",
+  "packageManager": "yarn@4.0.2",
+  "workspaces": [
+    "./packages/*"
+  ],
+  "dependencies": {
+    "@fastify/compress": "^6.5.0",
+    "@fastify/cors": "^8.4.1",
+    "@rollup/plugin-replace": "^5.0.5",
+    "@types/luxon": "^3.3.5",
+    "@types/node": "^20.10.0",
+    "@types/pino-http": "^5.8.4",
+    "console-remote-client": "^2.1.18",
+    "dotenv": "^16.3.1",
+    "fastify": "^4.24.3",
+    "fastify-http-errors-enhanced": "^4.3.0",
+    "fastify-plugin": "^4.5.1",
+    "luxon": "^3.4.4",
+    "pino": "^8.16.2",
+    "pino-http": "^8.5.1",
+    "pino-logflare": "^0.4.2",
+    "pino-transmit-http": "^1.0.1",
+    "typescript": "^5.3.2",
+    "vite": "^5.0.2",
+    "vite-plugin-node-polyfills": "^0.16.0",
+    "vite-plugin-singlefile": "^0.13.5"
+  },
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "cd ./packages/landing && yarn start",
+    "build": "cd ./packages/landing && yarn build",
+    "service:dev": "cd ./packages/service && yarn start:dev"
+  }
+}

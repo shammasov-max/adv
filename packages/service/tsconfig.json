@@ -1,0 +1,33 @@
+{
+    "ts-node": {
+      "transpileOnly": true
+    },
+    "compilerOptions": {
+      "module": "CommonJS",
+      "target": "ES2018",
+      "useDefineForClassFields": true,
+      "lib": [
+        "DOM",
+        "DOM.Iterable",
+        "ESNext"
+      ],
+      "noImplicitAny": true,
+      "noImplicitReturns": true,
+      "allowJs": true,
+      "skipLibCheck": true,
+      "esModuleInterop": true,
+      "allowSyntheticDefaultImports": true,
+      "strict": true,
+      "forceConsistentCasingInFileNames": true,
+      "resolveJsonModule": true,
+      "isolatedModules": true,
+      "noEmit": true,
+      "types": [
+        "node"
+      ]
+    },
+    "include": [
+      "src"
+, "../landing/src/typings.d.ts"    ]
+  }
+  

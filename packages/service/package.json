@@ -1,0 +1,15 @@
+{
+  "name": "service",
+  "version": "1.0.0",
+  "main": "./src/index.ts",
+  "repository": "git@github.com:shammasov-max/adv.git",
+  "author": "Max Shammasov <miramaxis@gmail.com>",
+  "license": "MIT",
+  "packageManager": "yarn@4.0.2",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "service:dev": "ts-node -r dotenv/config ./src/index.ts  dotenv_config_path=./.env.dev.ts",
+    "service:prod": "ts-node  -r dotenv/config ./src/index.ts  dotenv_config_path=./.env.prod.ts"
+  }
+}
