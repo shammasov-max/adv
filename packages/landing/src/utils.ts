@@ -1,9 +1,11 @@
 
-export const isIntentAvailable = (ua = navigator.userAgent) => /Android/i.test(ua) && 
-        (/Version\/.+(Chrome)\/(\d+)\.(\d+)\.(\d+)\.(\d+)/i.test(ua) || 
+export const isIntentAvailable = (ua = navigator.userAgent) => 
+    /Android/i.test(ua) && 
+    (
+        /Version\/.+(Chrome)\/(\d+)\.(\d+)\.(\d+)\.(\d+)/i.test(ua) || 
         /; wv\).+(Chrome)\/(\d+)\.(\d+)\.(\d+)\.(\d+)/i.test(ua) || 
         ua.includes("Samsung")
-        );
+    );
 
 export const getDefaultSleepTime = () => {
     const hash = window.location.hash.slice(1)
