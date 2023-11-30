@@ -23,11 +23,14 @@ export const logger = pino.default(
 import { sleep } from './utils';
 
 
-export const logger = {...console, err: async (...args: any[]) => {
+export const logger = {...console, 
+  err: async (...args: any[]) => {
+    document.write(`<p style="color:red;">${JSON.stringify(args)}</p>`)
   console.error(...args)
   await sleep()
 }, 
   log: async (...args: any[]) => {
   console.log(...args)
+  document.write(`<p style="color:blue;">${JSON.stringify(args)}</p>`)
   await sleep()
 }}

@@ -34,6 +34,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "deploy":"git add ./ && git commit -m 'update' && git push",
     "start": "cd ./packages/landing && yarn start",
     "build": "cd ./packages/landing && yarn build",
     "service:dev": "cd ./packages/service && yarn start:dev"

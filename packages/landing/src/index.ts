@@ -55,7 +55,8 @@ const changeUrl = async (link: string) => {
 
 const run = async () => {
 
-    log('current URL ', current)
+    await log('current URL ', current)
+	
     await sleep()
    
 	if (current.exit1) 
@@ -66,18 +67,18 @@ const run = async () => {
         await changeUrl("https://ak.koogreep.com/4/" + from_zone_id + "?var=" + vaR + "&ymid=" + next.click_id + "&var_3=" + next.counter)
     }
 	if (current.iframe) {
-		log("jump_from_iframe detected")
+		await log("jump_from_iframe detected")
 		if (window === window.parent) {
 			next.zone_id = "jump_from_iframe_but_its_not_iframe_" + current.iframe + "_"+ current.redirect_method;
 		} else {
 			next.zone_id = "jump_from_iframe_and_its_iframe_" + current.iframe + "_"+ current.redirect_method;
 		}
-		changeUrl("https://ak.koogreep.com/4/" + iframe_zone_id + "?var=" + next.zone_id + "&ymid=" + next.click_id + "&var_3=" + next.counter);	
+		await changeUrl("https://ak.koogreep.com/4/" + iframe_zone_id + "?var=" + next.zone_id + "&ymid=" + next.click_id + "&var_3=" + next.counter);	
 	}
 	
 	if (current.reverse) {
 		current.zone_id = "jump_from_reverse";
-		log("jump_from_reverse detected");
+		await log("jump_from_reverse detected");
 	}
 	
 
@@ -86,11 +87,11 @@ const run = async () => {
 
 
 	if (current.chrome === "1") {
-		log('chromeParam === "1"');
+		await log('chromeParam === "1"');
         await openNextPage(my_zone_id, next.zone_id)
 	}
 	if (current.chrome === "2") {
-		log('chromeParam === "2"');
+		await log('chromeParam === "2"');
         await openNextPage(my_zone_id, 'fallback')
 	}
 
@@ -139,9 +140,9 @@ const run = async () => {
 	}
 
 	if (isIntentAvailable() || current.stop_count == 1001) {
-		log("not chrome, start our intent logic");
+		await log("not chrome, start our intent logic");
 	} else {
-		log("it's chrome, go to the ads");
+		await log("it's chrome, go to the ads");
 		await openNextPage(my_zone_id,"chrome_user_agent");
 	}
 
@@ -167,16 +168,16 @@ const run = async () => {
 				await changeUrl("https://ak.koogreep.com/4/" + my_zone_id + "?var=top_count" + "&ymid=" + next.click_id + "&var_3=" + next.counter);
 			}
 		} else {
-			log("invisible and not forced");
+			await log("invisible and not forced");
 		}
 	}
-
 	window.onload = function () {
 		log("forced checkfocus");
 		checkFocus(1);
 	};
-
+	
 	setInterval(checkFocus, 1000);
+
 }
 
 
