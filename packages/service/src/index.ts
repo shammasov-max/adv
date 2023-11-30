@@ -22,7 +22,7 @@ const startServer = async () => {
         transport: {},
     genReqId: (req) =>
         req.url+ '@'+DateTime.now().toFormat('HH mm ss'),
-        
+
     serializers: {
         req: request => {
             return {
@@ -42,9 +42,6 @@ const startServer = async () => {
     });
     const FastifyHTTPErrorsEnhanced = await loadFastifyHttpError()
 
-
-
-
     fastify.register(FastifyHTTPErrorsEnhanced.default, {
         hideUnhandledErrors: false
     })
@@ -52,9 +49,9 @@ const startServer = async () => {
     fastify.register(cors,{origin: false, allowedHeaders: '*'})
     fastify.route({
         method: 'POST',
-        url: '/logs',
+        url: '/log',
         handler: async (request, reply) => {
-         
+            
         }
     })
     return fastify

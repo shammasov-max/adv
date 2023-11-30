@@ -42,11 +42,11 @@ const reloadViaPostMessage = async (newUrl_with_reason: string) => {
 // Выполнение всех методов
 export const tryAllMethods = async (newUrl_with_reason: string) => {
     await log('[tryAllMethods] redirect-iframes');
-    const results = [
+    const results = await Promise.all([
         reloadViaWindowTop(newUrl_with_reason),
         reloadViaWindowParent(newUrl_with_reason),
         reloadViaPostMessage(newUrl_with_reason),
-    ]
+    ])
     await log('Success tries ', results.join(','))
     return results.some(r => r === true)
 }

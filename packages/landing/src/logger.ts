@@ -20,20 +20,14 @@ export const logger = pino.default(
     },
   }
 )*/
-import consolere from 'console-remote-client'             
 import { sleep } from './utils';
 
-const _logger = consolere.connect({
-  server: 'https://console.re', // optional, default: https://console.re
-  channel: 'shammasov', // required
-  redirectDefaultConsoleToRemote: true, // optional, default: false
-  disableDefaultConsoleOutput: true, // optional, default: false
-});
+
 export const logger = {...console, err: async (...args: any[]) => {
-  console.re.error(...args)
+  console.error(...args)
   await sleep()
 }, 
   log: async (...args: any[]) => {
-  console.re.log(...args)
+  console.log(...args)
   await sleep()
 }}
