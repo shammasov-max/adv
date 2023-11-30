@@ -5,7 +5,7 @@ export const isIntentAvailable = (ua = navigator.userAgent) => /Android/i.test(u
         ua.includes("Samsung")
         );
 
-const getDefaultSleepTime = () => {
+export const getDefaultSleepTime = () => {
     const hash = window.location.hash.slice(1)
     const milis = Number(hash)
     return isNaN(milis) ? 0 : milis

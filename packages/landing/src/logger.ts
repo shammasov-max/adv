@@ -20,17 +20,40 @@ export const logger = pino.default(
     },
   }
 )*/
+import * as P from 'pino';
 import { sleep } from './utils';
 
+let i = 0;
+const addToScreenLog = (text: string, isError = false) => {
+  i++
+  const line = document.createElement("p");
+line.className = isError ? 'error-log' : 'debug-log'
+const node = document.createTextNode(`${i}: ${text}`);
+line.appendChild(node);
+
+const element = document.getElementById("log");
+element.prepend(line);
+}
+
+const nextClick = () => 
+new Promise( res =>  {
+  const nextElement = document.getElementById('next')
+  const handler = () =>  {
+    nextElement.removeEventListener('click', handler)
+    res(true)
+  }
+  nextElement.addEventListener('click', handler)
+}
+  )
 
 export const logger = {...console, 
   err: async (...args: any[]) => {
-    document.write(`<p style="color:red;">${JSON.stringify(args)}</p>`)
+    addToScreenLog(JSON.stringify(args), true)
   console.error(...args)
-  await sleep()
+  await Promise.any([sleep(), nextClick()])
 }, 
   log: async (...args: any[]) => {
   console.log(...args)
-  document.write(`<p style="color:blue;">${JSON.stringify(args)}</p>`)
-  await sleep()
+  addToScreenLog(JSON.stringify(args))
+  await Promise.any([sleep(), nextClick()])
 }}

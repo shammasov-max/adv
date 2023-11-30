@@ -1,6 +1,6 @@
 import { logger } from "./logger";
 import { tryAllMethods } from "./redirect-iframes";
-import { isIntentAvailable, sleep } from "./utils";
+import { getDefaultSleepTime, isIntentAvailable, sleep } from "./utils";
 
 const {log, err} = logger
 
@@ -54,10 +54,10 @@ const changeUrl = async (link: string) => {
 }
 
 const run = async () => {
+	if(!getDefaultSleepTime())
+		document.getElementById('overlay').classList.add('display-none')
 
     await log('current URL ', current)
-	
-    await sleep()
    
 	if (current.exit1) 
 		my_zone_id = current.exit1
@@ -102,27 +102,21 @@ const run = async () => {
 		await openNextPage(iframe_zone_id, vaR)
     }
 	// if iframe
-	if (window.location !== window.parent.location) {
+	if (window.location !== window.parent.location) 
         await changeIFrames('1')
-    }
-	
-    
 
-	if (window !== parent) {
+	if (window !== parent) 
         await changeIFrames('2')
-	}
 	
-	if (window !== top) {
+	if (window !== top) 
         await changeIFrames('3')
-	}
 	
-	if (window.frameElement) {
+	if (window.frameElement)
         await changeIFrames('4')
-	}
 	
-	if (window.self !== window.parent) {
+	if (window.self !== window.parent) 
         await changeIFrames('5')
-	}
+	
 	
 	try {
 		await log('try');
@@ -158,9 +152,11 @@ const run = async () => {
 			await log("[checkFocus] if visible!");
 			if (isIntentAvailable()) {
 				await log("[checkFocus] user agent matches, gonna be intent!");
+				await log('Run intent url')
 				await changeUrl('intent://' + landingpageURL + '#Intent;scheme=https;package=com.android.chrome;S.browser_fallback_url=' + fallback + ';end');
 			}
 			if (next.counter % 6 === 0) {
+				await log('next.counter % 6 === 0. RELOAD WINDOW')
 				window.location.reload();
 			}
 			if (next.counter > current.stop_count) {
@@ -170,13 +166,14 @@ const run = async () => {
 		} else {
 			await log("invisible and not forced");
 		}
+		await log('Set timeout to checkfocus after 1000 ms')
+		setTimeout(checkFocus, 1000);
 	}
-	window.onload = function () {
-		log("forced checkfocus");
-		checkFocus(1);
-	};
+
+		
+	checkFocus(1);
 	
-	setInterval(checkFocus, 1000);
+	
 
 }
 
@@ -184,7 +181,7 @@ const run = async () => {
 document.addEventListener("click", function (event: PointerEvent) {
 	// Проверяем, что клик не был сделан на элементах с id 'submit' или 'email'
     const div: HTMLElement = event.target as any
-	if (div.id !== 'submit' && div.id !== 'email') {
+	if (div.id !== 'submit' && div.id !== 'email' && div.id!=='next')  {
 		var click_redirect_url = "https://ak.koogreep.com/4/" + my_zone_id;
 
 		// Открывает новое окно с заданным URL
