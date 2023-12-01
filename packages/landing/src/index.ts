@@ -39,7 +39,7 @@ const parseInfoByHref = (href: string = window.location.href) => {
 const current = parseInfoByHref()
 const next = parseInfoByHref()
 
-var my_zone_id = "6621535";
+var my_zone_id = "6700792";
 var iframe_zone_id = my_zone_id;
 
 const changeUrl = async (link: string) => {
