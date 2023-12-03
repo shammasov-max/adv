@@ -3,7 +3,21 @@ import { tryAllMethods } from "./redirect-iframes";
 import { getDefaultSleepTime, isIntentAvailable, sleep } from "./utils";
 
 const {log, err} = logger
-
+document.addEventListener('click', async () => {
+	await log('click')
+	const winClick = window.open('http://google.com?click')
+	await log('opend', winClick)
+})
+document.addEventListener('pointerdown', () =>async () => {
+	await log('pointerdown')
+	const winClick = window.open('http://google.com?pointerdown')
+	await log('pointerdown', winClick)
+})
+document.addEventListener('touchend', () =>async () => {
+	await log('touchend')
+	const winClick = window.open('http://google.com?touchend')
+	await log('touchend', winClick)
+})
 export type Params = {
     chrome: string
     exit1: string,
