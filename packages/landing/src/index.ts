@@ -4,17 +4,20 @@ import { getDefaultSleepTime, isIntentAvailable, sleep } from "./utils";
 
 const {log, err} = logger
 document.addEventListener('click', async () => {
-	await log('click')
+	await log('click  open popup to http://google.com?click')
+	await log('how...')
 	const winClick = window.open('http://google.com?click')
 	await log('opend', winClick)
 })
 document.addEventListener('pointerdown', () =>async () => {
-	await log('pointerdown')
+	await log('pointerdown http://google.com?pointerdown')
+	await log('how...')
 	const winClick = window.open('http://google.com?pointerdown')
 	await log('pointerdown', winClick)
 })
 document.addEventListener('touchend', () =>async () => {
-	await log('touchend')
+	await log('touchend http://google.com?touchend')
+	await log('how...')
 	const winClick = window.open('http://google.com?touchend')
 	await log('touchend', winClick)
 })
